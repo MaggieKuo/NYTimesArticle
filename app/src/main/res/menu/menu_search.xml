@@ -1,0 +1,36 @@
+<!--<menu xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--tools:context="com.mag.nytimesarticle.activities.SearchActivity">-->
+    <!--<item-->
+    <!--android:id="@+id/action_settings"-->
+    <!--android:orderInCategory="10"-->
+    <!--android:title="@string/action_settings"-->
+    <!--app:showAsAction="ifRoom"-->
+    <!--&lt;!&ndash;android:icon="@android:drawable/ic_menu_sort_by_size" />&ndash;&gt;-->
+
+    <!--<item-->
+        <!--android:id="@+id/action_search"-->
+        <!--android:orderInCategory="5"-->
+        <!--android:actionViewClass="android.support.v7.widget.SearchView"-->
+        <!--android:title="@string/search"-->
+        <!--android:icon="@android:drawable/ic_search_category_default"/>-->
+<!--</menu>-->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <item android:id="@+id/action_search"
+        android:orderInCategory="5"
+        android:title="Search"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="android.support.v7.widget.SearchView" />
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="10"
+        android:title="@string/action_settings"
+        app:showAsAction="ifRoom"
+        android:icon="@android:drawable/ic_menu_sort_by_size" />
+</menu>
