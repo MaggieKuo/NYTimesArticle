@@ -1,5 +1,6 @@
 package com.mag.nytimesarticle.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -22,7 +23,7 @@ import butterknife.ButterKnife;
 public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecyclerAdapter.ArticleHolder>{
     ArrayList<Article> articles;
     RecyclerViewClick recyclerViewClick;
-
+    Context context;
 
     public ArticleRecyclerAdapter(ArrayList<Article> articles, RecyclerViewClick recyclerViewClick) {
         this.articles = articles;
@@ -31,11 +32,22 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
 
     public void setData(ArrayList<Article> articles){
         this.articles = articles;
-        notifyDataSetChanged();
+                notifyDataSetChanged();
+
+//        new Runnable(){
+//
+//            @Override
+//            public void run() {
+//                notifyDataSetChanged();
+//            }
+//        };
+
     }
 
     @Override
     public ArticleHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (context==null)
+            context = parent.getContext();
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_article_result, null);
         return new ArticleHolder(view, recyclerViewClick);
@@ -43,7 +55,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
 
     @Override
     public void onBindViewHolder(ArticleHolder holder, int position) {
-        if (position < 0) return;
+//        if (position < 0) return;
 
         holder.setData(articles.get(position));
     }
@@ -58,7 +70,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
 
     }
 
-    public class ArticleHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class ArticleHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.ivImage)
         ImageView ivImage;

@@ -120,23 +120,33 @@ public class SearchActivity2 extends AppCompatActivity implements ArticleRecycle
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 Log.d(TAG, "page=" + page);
-                Log.d(TAG, "total items count" + totalItemsCount);
+                Log.d(TAG, "total items count=" + totalItemsCount);
                 search(null, page);
             }
         };
-        gvResults.addOnScrollListener(scrollListener);
+//        gvResults.addOnScrollListener(scrollListener);
 
         search(null, 0);
 
     }
 
+    void resetRecyclerView(){
+
+        if (articles != null) {
+            articles.clear();
+            adapter.setData(articles);
+        }
+
+//        scrollListener.resetState();
+
+    }
+
     void search(String query, int page) {
-//        Log.d(TAG, "search onclick");
+        Log.d(TAG, "search onclick query="+query + " / page="+page);
         if (query!=null)
             this.query = query;
 
-        if (articles != null)
-            articles.clear();
+        resetRecyclerView();
 
         ANRequest.GetRequestBuilder an = AndroidNetworking.get(getString(R.string.news_url));
         an.addQueryParameter("api-key", getString(R.string.ny_search_api_key));
@@ -144,8 +154,9 @@ public class SearchActivity2 extends AppCompatActivity implements ArticleRecycle
         if (query!=null && !"".equals(this.query))
                 an.addQueryParameter("q", this.query);
 
-        an.addQueryParameter("page", String.valueOf(page))
-                .addQueryParameter("begin_date", Utils.getStringDate(-2))
+        an.addQueryParameter("page", String.valueOf(page));
+
+        an.addQueryParameter("begin_date", Utils.getStringDate(-2))
                 .addQueryParameter("sort", "newest");
 
         an.build()
